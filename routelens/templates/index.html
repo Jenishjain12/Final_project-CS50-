@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>RouteLens</title>
+
+    <!-- Leaflet CSS -->
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    >
+
+    <!-- Our CSS -->
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='styles.css') }}"
+    >
+</head>
+
+<body>
+
+    <main class="app">
+
+        <!-- Top navigation -->
+        <header class="topbar">
+
+            <div class="brand">
+                <div class="brand-icon">⌖</div>
+
+                <div>
+                    <h1>RouteLens</h1>
+                    <p>Navigate. Explore. Continue.</p>
+                </div>
+            </div>
+
+            <button
+                id="location-button"
+                class="location-button"
+                type="button"
+            >
+                <span>◉</span>
+                My Location
+            </button>
+
+        </header>
+
+
+        <!-- Search -->
+        <section class="search-panel">
+
+            <div class="search-box">
+
+                <span class="search-icon">⌕</span>
+
+                <input
+                    id="destination-input"
+                    type="text"
+                    placeholder="Where do you want to go?"
+                    autocomplete="off"
+                >
+
+                <button
+                    id="search-button"
+                    type="button"
+                >
+                    Search
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- Map -->
+        <div id="map"></div>
+
+
+        <aside
+            id="place-card"
+            class="place-card"
+            aria-labelledby="place-card-name"
+            aria-hidden="true"
+            hidden
+        >
+
+            <div class="place-card-header">
+
+                <div>
+                    <p class="place-card-kicker">Nearby place</p>
+                    <h2 id="place-card-name"></h2>
+                </div>
+
+                <button
+                    id="close-place-card"
+                    class="place-card-close"
+                    type="button"
+                    aria-label="Close place details"
+                >
+                    ×
+                </button>
+
+            </div>
+
+            <div class="place-card-details">
+
+                <p id="place-card-category" class="place-card-row" hidden>
+                    <span aria-hidden="true">✦</span>
+                    <span class="place-card-value"></span>
+                </p>
+
+                <p id="place-card-distance" class="place-card-row" hidden>
+                    <span aria-hidden="true">◉</span>
+                    <span class="place-card-value"></span>
+                </p>
+
+                <p id="place-card-address" class="place-card-row" hidden>
+                    <span aria-hidden="true">⌖</span>
+                    <span class="place-card-value"></span>
+                </p>
+
+            </div>
+
+        </aside>
+
+
+       <!-- Nearby categories -->
+
+<section
+    id="category-panel"
+    class="category-panel"
+>
+
+    <div class="category-header">
+
+        <div>
+            <h2>Explore Nearby</h2>
+            <p>Find places around your route</p>
+        </div>
+
+        <button
+            id="close-category-button"
+            type="button"
+        >
+            ×
+        </button>
+
+    </div>
+
+    <div class="category-grid">
+
+        <button
+            class="category-button"
+            data-category="restaurant"
+        >
+            <span>🍽️</span>
+            <strong>Restaurants</strong>
+        </button>
+
+        <button
+            class="category-button"
+            data-category="cafe"
+        >
+            <span>☕</span>
+            <strong>Cafes</strong>
+        </button>
+
+        <button
+            class="category-button"
+            data-category="hospital"
+        >
+            <span>🏥</span>
+            <strong>Hospitals</strong>
+        </button>
+
+        <button
+            class="category-button"
+            data-category="hotel"
+        >
+            <span>🏨</span>
+            <strong>Hotels</strong>
+        </button>
+
+        <button
+            class="category-button"
+            data-category="fuel"
+        >
+            <span>⛽</span>
+            <strong>Fuel</strong>
+        </button>
+
+        <button
+            class="category-button"
+            data-category="grocery"
+        >
+            <span>🛒</span>
+            <strong>Groceries</strong>
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- Bottom controls -->
+
+<div class="bottom-controls">
+
+    <button
+        id="explore-button"
+        type="button"
+    >
+        ✦ Explore Nearby
+    </button>
+
+    <section class="status-card">
+
+        <div class="status-indicator"></div>
+
+        <div>
+            <h2 id="status-title">
+                Ready to explore
+            </h2>
+
+            <p id="location-status">
+                Waiting for your location...
+            </p>
+        </div>
+
+    </section>
+
+</div>
+
+    </main>
+
+
+    <!-- Leaflet JS -->
+    <script
+        src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+    </script>
+
+    <!-- Our JavaScript -->
+    <script
+        src="{{ url_for('static', filename='app.js') }}">
+    </script>
+
+</body>
+</html>
